@@ -19,7 +19,7 @@ export default function RouteSelection({ history }) {
 
   const handleLogoClick = (e) => {
     e.preventDefault();
-    history.push("/routes");
+    history.push("/dashboard");
   };
 
   return (

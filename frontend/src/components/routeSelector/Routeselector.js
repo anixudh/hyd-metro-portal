@@ -4,34 +4,34 @@ import * as apiCall from "./routeApifunc";
 import BusList from "../BusList/BusList";
 export default function Routeselector() {
   const [dataInp, setData] = useState("");
-  const [startCity, setStartCity] = useState("");
+  const [startStation, setStartStation] = useState("");
   const [destination, setDestination] = useState("");
-  const handleToCity = (e) => {
+  const handleToStation = (e) => {
     e.preventDefault();
-    setDestination({ destination: e.target.value });
-    localStorage.setItem("destination", e.target.value);
+    setDestination(e.target.value);
   };
   const renderBusList = (dataInp) => {
     if (Object.keys(dataInp).length > 0) {
       return <BusList value={dataInp} />;
     }
   };
-  const handleFromCity = (e) => {
+  const handleFromStation = (e) => {
     e.preventDefault();
-    setStartCity({ startCity: e.target.value });
-    localStorage.setItem("start", e.target.value);
-    // console.log(startCity)
+    setStartStation(e.target.value);
+    // console.log(startStation)
   };
 
   const getRoutes = (e) => {
     e.preventDefault();
-    // console.log(startCity,destination)
-    apiCall
-      .getRoutesFromApi(startCity.startCity, destination.destination)
-      .then((response) => response.data)
-      .then((data) => {
-        setData(data.bus);
-      });
+    // console.log(startStation,destination)
+    // apiCall
+    //   .getRoutesFromApi(startStation.startStation, destination.destination)
+    //   .then((response) => response.data)
+    //   .then((data) => {
+    //     setData(data.bus);
+    //   });
+    localStorage.setItem("destination", destination);
+    localStorage.setItem("startStation", startStation);
   };
 
   return (
@@ -44,7 +44,7 @@ export default function Routeselector() {
             data-style="btn-new"
             class="selectpicker"
             onChange={(e) => {
-              handleFromCity(e);
+              handleFromStation(e);
             }}
           >
             <option>FROM</option>
@@ -101,7 +101,7 @@ export default function Routeselector() {
             <option> Pedamma Temple </option>
             <option> Madhapur </option>
             <option> Durgam Chervu</option>
-            <option> HITEC City </option>
+            <option> HITEC Station </option>
             <option> Raidurg </option>
           </select>
           <select
@@ -109,7 +109,7 @@ export default function Routeselector() {
             data-style="btn-new"
             class="selectpicker"
             onChange={(e) => {
-              handleToCity(e);
+              handleToStation(e);
             }}
           >
             <option>TO</option>
@@ -166,7 +166,7 @@ export default function Routeselector() {
             <option> Pedamma Temple </option>
             <option> Madhapur </option>
             <option> Durgam Chervu</option>
-            <option> HITEC City </option>
+            <option> HITEC Station </option>
             <option> Raidurg </option>
           </select>
           <input type="submit" className=" btn btn-primary btn-md getRoute" />

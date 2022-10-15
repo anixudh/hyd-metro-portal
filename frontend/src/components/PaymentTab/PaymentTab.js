@@ -2,6 +2,7 @@ import React from "react";
 import Card from "react-credit-cards";
 import "./PaymentTab.css";
 import jwt_decode from "jwt-decode";
+import { useNavigate } from "react-router-dom/cjs/react-router-dom";
 
 import {
   formatCreditCardNumber,
@@ -10,6 +11,7 @@ import {
   formatFormData,
 } from "./utils";
 import "react-credit-cards/es/styles-compiled.css";
+import Axios from "axios";
 
 export default class App extends React.Component {
   state = {
@@ -73,6 +75,18 @@ export default class App extends React.Component {
     e.preventDefault();
     localStorage.setItem("paymentData", JSON.stringify(this.state.token));
     window.location.href = "/getTicket";
+    Axios.post(
+      "http://localhost:8080/routes/",
+      {
+        email: localStorage.getItem("email"),
+        startStation: localStorage.getItem("startStation"),
+        destination: localStorage.getItem("destination"),
+        price: 0,
+      },
+      (err, data) => {
+        if (err) console.log(err);
+      }
+    );
   };
 
   renderNamesOfPassenger = () => {
@@ -216,7 +230,10 @@ export default class App extends React.Component {
                     {" "}
                     {localStorage.getItem("date")}{" "}
                   </p>{" "}
-                  <p className="usrName"> {localStorage.getItem("start")} </p>{" "}
+                  <p className="usrName">
+                    {" "}
+                    {localStorage.getItem("startStation")}{" "}
+                  </p>{" "}
                   <p className="usrName">
                     {" "}
                     {localStorage.getItem("destination")}{" "}
