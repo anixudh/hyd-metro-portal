@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 var ticket = require("../models/Ticket");
 const User = require("../models/User");
+var moment = require("moment");
 
 // router.get('/', (req, res) => {
 //     bus.find({ companyName, startCity, totalseats, availableseats }, (err, result) => {
@@ -13,20 +14,22 @@ router.get("/", (req, res) => {
   console.log("hi");
 });
 router.post("/", async (req, res) => {
-  let user = await User.findOne({ email: req.body.email }, (err, res) => {
-    if (err) console.log(err);
-    return res;
-  });
-  if (!user) {
-    console.log("user with email not found");
-    return;
-  }
+  // let user = await User.findOne({ email: req.body.email }, (err, res) => {
+  //   if (err) console.log(err);
+  //   return res;
+  // });
+  // if (!user) {
+  //   console.log("user with email not found");
+  //   return;
+  // }
   ticket.create(
     {
-      userId: user._id,
+      //userId: user._id,
+      email: req.body.email,
       startStation: req.body.startStation,
       destination: req.body.destination,
       price: req.body.price,
+      bookedAt: moment().toISOString(),
     },
     (err, res) => {
       if (err) console.log(err);

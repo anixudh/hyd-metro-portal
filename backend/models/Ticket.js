@@ -3,7 +3,10 @@ const Schema = mongoose.Schema;
 
 const TicketSchema = new Schema(
   {
-    userId: {
+    // userId: {
+    //   type: String,
+    // },
+    email: {
       type: String,
     },
     startStation: {
@@ -13,6 +16,9 @@ const TicketSchema = new Schema(
       type: String,
     },
     price: {
+      type: String,
+    },
+    bookedAt: {
       type: String,
     },
   },

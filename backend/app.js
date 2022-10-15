@@ -17,6 +17,8 @@ const loggedInPage = require("./routes/loggedInUser");
 const bookingRoute = require("./routes/routeSelection");
 
 var registerRouter = require("./routes/register");
+
+const bookingHistory = require("./routes/bookingHistory");
 //--------------------------------------------------------
 
 //DB Config
@@ -45,10 +47,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
 app.use("/", login);
 
-// app.get("/routes", (req, res) => {
-//   console.log("hi");
-// });
-
 app.use("/routes", bookingRoute);
 app.use("/register", registerRouter); // To register page
 app.use(
@@ -56,5 +54,5 @@ app.use(
   passport.authenticate("jwt", { session: false }),
   loggedInPage
 ); //To Secure Route
-
+app.use("/bookingHistory", bookingHistory);
 module.exports = app;
