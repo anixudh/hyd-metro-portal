@@ -2,7 +2,7 @@ import React from "react";
 import Card from "react-credit-cards";
 import "./PaymentTab.css";
 import jwt_decode from "jwt-decode";
-import { useNavigate } from "react-router-dom/cjs/react-router-dom";
+import { stations, changeStation, getPrice } from "../../helper";
 
 import {
   formatCreditCardNumber,
@@ -12,6 +12,7 @@ import {
 } from "./utils";
 import "react-credit-cards/es/styles-compiled.css";
 import Axios from "axios";
+import { v4 } from "uuid";
 
 export default class App extends React.Component {
   state = {
@@ -74,14 +75,22 @@ export default class App extends React.Component {
   moveToTicketPage = (e) => {
     e.preventDefault();
     localStorage.setItem("paymentData", JSON.stringify(this.state.token));
+    const price = getPrice(
+      localStorage.getItem("startStation"),
+      localStorage.getItem("destination")
+    );
+    const transactionId = v4();
+    localStorage.setItem("price", price);
+    localStorage.setItem("transactionId", transactionId);
     window.location.href = "/getTicket";
     Axios.post(
       "http://localhost:8080/routes/",
       {
+        transactionId: transactionId,
         email: localStorage.getItem("email"),
         startStation: localStorage.getItem("startStation"),
         destination: localStorage.getItem("destination"),
-        price: 0,
+        price: price,
       },
       (err, data) => {
         if (err) console.log(err);
@@ -217,19 +226,20 @@ export default class App extends React.Component {
               <p> BOOKING DETAILS </p>{" "}
               <div className="row">
                 <div className="col-6 pt">
-                  <p className="hdng"> Username </p> <hr className="hr3" />
+                  {/* <p className="hdng"> Username </p> <hr className="hr3" /> */}
+                  <hr className="hr3" />
                   <p className="hdng"> From </p>
                   <p className="hdng"> To </p> <hr className="hr3" />
                   <p className="hdng"> Ticket price </p>{" "}
-                  <p className="hdng"> Tax </p>{" "}
-                  <p className="hdng"> Toal Sum </p>{" "}
+                  {/* <p className="hdng"> Tax </p>{" "}
+                  <p className="hdng"> Toal Sum </p>{" "} */}
                 </div>{" "}
                 <div className="col-6">
                   <hr className="hr3" />
-                  <p className="usrName">
+                  {/* <p className="usrName">
                     {" "}
                     {localStorage.getItem("date")}{" "}
-                  </p>{" "}
+                  </p>{" "} */}
                   <p className="usrName">
                     {" "}
                     {localStorage.getItem("startStation")}{" "}
@@ -239,10 +249,13 @@ export default class App extends React.Component {
                     {localStorage.getItem("destination")}{" "}
                   </p>{" "}
                   <hr className="hr3" />
-                  {this.renderSeatNumbers()} <p> {this.getSumTotal()} </p>
+                  {localStorage.getItem("price")}
                 </div>{" "}
               </div>{" "}
             </div>{" "}
+            <button className="btn border" onClick={this.moveToTicketPage}>
+              Pay Later
+            </button>
           </div>{" "}
         </div>{" "}
       </div>

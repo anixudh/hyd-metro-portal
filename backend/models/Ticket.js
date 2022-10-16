@@ -3,9 +3,9 @@ const Schema = mongoose.Schema;
 
 const TicketSchema = new Schema(
   {
-    // userId: {
-    //   type: String,
-    // },
+    transactionId: {
+      type: String,
+    },
     email: {
       type: String,
     },

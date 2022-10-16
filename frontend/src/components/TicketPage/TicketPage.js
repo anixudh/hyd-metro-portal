@@ -1,5 +1,7 @@
 import React from "react";
 import "./TicketPage.css";
+import { stations, changeStation, getPrice } from "../../helper";
+
 export default function TicketPage({ history }) {
   const handleSignOut = (e) => {
     e.preventDefault();
@@ -14,50 +16,34 @@ export default function TicketPage({ history }) {
     history.push("/routes");
   };
   const getLocationData = () => {
-    let from = localStorage.getItem("start");
+    let from = localStorage.getItem("startStation");
     let to = localStorage.getItem("destination");
     return (
       <div>
-        <p>From: {from}</p>
-        <p>To: {to}</p>
+        <p style={{ color: stations[from.trim()] }}>From: {from}</p>
+        <p style={{ color: stations[to.trim()] }}>To: {to}</p>
       </div>
     );
   };
-  const getPassengerName = () => {
-    let nameArray = localStorage.getItem("nameData");
-    let names = JSON.parse(nameArray);
-    return names.map((name, idx) => {
-      return (
-        <div key={idx}>
-          <p className="names">{name}</p>
-        </div>
-      );
-    });
+  const getChangeStation = () => {
+    let from = localStorage.getItem("startStation");
+    let to = localStorage.getItem("destination");
+
+    let change = changeStation(from, to);
+    if (change == "") return <div></div>;
+    else return <div>Change at: {change}</div>;
   };
-  // const getSeatNumbers = () => {
-  //     let noArray = localStorage.getItem("reservedSeats")
-  //     let arr = JSON.parse(noArray)
-  //     return arr.map((element, idx) => {
-  //         return (
-  //             <div key={idx}>
-  //                 <p classsName="seatNo">{element}</p>
-  //             </div>
-  //         )
-  //     })
-  // }
+  const getTicketPrice = () => {
+    return <div>Price: {localStorage.getItem("price")}</div>;
+  };
   const getIdNumber = () => {
-    let tokenData = localStorage.getItem("selectedBusId");
-    return <p className="idData">{tokenData}</p>;
-  };
-  const getDateValue = () => {
-    let dat = localStorage.getItem("date");
-    return <p>On: {dat}, 10 AM (Hourly commute)</p>;
+    return <p className="idData">{localStorage.getItem("transactionId")}</p>;
   };
   return (
     <div className="container">
       <div>
         <nav className="mb-4 navbar navbar-expand-lg navbar-dark bg-unique hm-gradient">
-          <a href="/#" className="navbar-brand Company-Log">
+          <a href="/dashboard" className="navbar-brand Company-Log">
             UT
           </a>
           <button
@@ -101,7 +87,7 @@ export default function TicketPage({ history }) {
       <div className="tpMain">
         <article className="ticket">
           <header className="ticket__wrapper">
-            <div className="ticket__header">1 🎟 UNIQUE TRAVELS</div>
+            <div className="ticket__header">1 🎟 HYD METRO</div>
           </header>
           <div className="ticket__divider">
             <div className="ticket__notch"></div>
@@ -110,6 +96,8 @@ export default function TicketPage({ history }) {
           <div className="ticket__body">
             <section className="ticket__section">
               {getLocationData()}
+              {getChangeStation()}
+
               {/* {getSeatNumbers()} */}
               {/* <p>
                 Your seats are together <span>{getDateValue()}</span>
@@ -120,6 +108,7 @@ export default function TicketPage({ history }) {
             {/* {getPassengerName()} */}
             {/* </section> */}
             <section className="ticket__section">
+              {getTicketPrice()}
               <h3>Payment Method</h3>
               <p>Credit Card</p>
             </section>

@@ -24,7 +24,7 @@ router.post("/", async (req, res) => {
   // }
   ticket.create(
     {
-      //userId: user._id,
+      transactionId: req.body.transactionId,
       email: req.body.email,
       startStation: req.body.startStation,
       destination: req.body.destination,
