@@ -56,9 +56,12 @@ app.use(
   loggedInPage
 ); //To Secure Route
 app.use("/bookingHistory", bookingHistory);
-app.use(express.static(path.join(__dirname, "frontend", "build")));
+app.use(express.static(path.resolve(__dirname, "./frontend/build")));
 
 app.get("*", function (req, res) {
-  res.sendFile(path.join(__dirname, "frontend", "build", "index.html"));
+  res.sendFile(path.resolve(__dirname, "./frontend/build", "index.html"));
 });
-module.exports = app;
+
+app.listen(PORT, () => {
+  console.log(`server running on port ${8080}`);
+});
