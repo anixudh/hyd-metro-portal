@@ -31,7 +31,7 @@ export default function RouteSelection({ history }) {
             className="navbar-brand Company-Log"
             onClick={(e) => handleLogoClick(e)}
           >
-            UT
+            HYD METRO
           </a>
           <button
             className="navbar-toggler"

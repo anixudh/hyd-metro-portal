@@ -1,7 +1,6 @@
-.main-container{
+.main-container {
   display: flex;
   flex-direction: column;
-  padding-top: 50%;
 }
 
 .mainBtnDash {
@@ -19,11 +18,10 @@
   background-color: transparent;
   cursor: pointer;
   text-decoration: none;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 900;
   font-size: 17px;
   letter-spacing: 0.045em;
-  z-index: 1000;
 }
 
 .mainBtnDash svg {
@@ -43,9 +41,21 @@
 
 .mainBtnDash span {
   background: rgb(130, 230, 255);
-  background: -moz-linear-gradient(left, rgba(130, 230, 255, 1) 0%, rgb(130, 230, 255) 100%);
-  background: -webkit-linear-gradient(left, rgba(130, 230, 255, 1) 0%, rgba(130, 230, 255, 1) 100%);
-  background: linear-gradient(to right, rgba(130, 230, 255, 1) 0%, rgb(130, 230, 255) 100%);
+  background: -moz-linear-gradient(
+    left,
+    rgba(130, 230, 255, 1) 0%,
+    rgb(130, 230, 255) 100%
+  );
+  background: -webkit-linear-gradient(
+    left,
+    rgba(130, 230, 255, 1) 0%,
+    rgba(130, 230, 255, 1) 100%
+  );
+  background: linear-gradient(
+    to right,
+    rgba(130, 230, 255, 1) 0%,
+    rgb(130, 230, 255) 100%
+  );
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff8282', endColorstr='#e178ed', GradientType=1);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -57,7 +67,7 @@
   stroke-dashoffset: 437;
 }
 
-.mapImg{
+.mapImg {
   display: flex;
   justify-content: flex-end;
   margin: 1%;

@@ -4,6 +4,7 @@ import "./bookingHistory.css";
 import moment from "moment";
 import { getPrice } from "../../helper";
 import { Link } from "react-router-dom";
+import ModalImage from "react-modal-image";
 
 const getBookingHistory = async () => {
   let tickets = await Axios.post("http://localhost:8080/bookingHistory", {
@@ -51,9 +52,13 @@ export default function BookingHistory({ history }) {
         tickets.map((ticket, index) => {
           let expiredStatus = getExpired(ticket);
           return (
-            <div key={index} className="ticketBox">
-              {ticket.startStation}--
-              {ticket.destination}
+            <div key={index} className="ticketBox card">
+              {ticket.startStation} {"   --   "} {ticket.destination}
+              {ticket.paid ? (
+                <div style={{ color: "green" }}>Paid</div>
+              ) : (
+                <div style={{ color: "yellow" }}>Pending</div>
+              )}
               {expiredStatus ? (
                 <div>Expired</div>
               ) : (
@@ -143,6 +148,7 @@ export default function BookingHistory({ history }) {
                   </button>
                 </div>
               )}
+              <ModalImage small={"./QRSmall.png"} large={"./QR.png"} alt="QR" />
             </div>
           );
         })}

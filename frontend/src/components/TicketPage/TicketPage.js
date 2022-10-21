@@ -34,7 +34,12 @@ export default function TicketPage({ history }) {
     else return <div>Change at: {change}</div>;
   };
   const getTicketPrice = () => {
-    return <div>Price: {localStorage.getItem("price")}</div>;
+    return (
+      <div>
+        Price: {"₹"}
+        {localStorage.getItem("price")}
+      </div>
+    );
   };
   const getIdNumber = () => {
     return <p className="idData">{localStorage.getItem("transactionId")}</p>;
@@ -44,7 +49,7 @@ export default function TicketPage({ history }) {
       <div>
         <nav className="mb-4 navbar navbar-expand-lg navbar-dark bg-unique hm-gradient">
           <a href="/dashboard" className="navbar-brand Company-Log">
-            UT
+            HYD METRO
           </a>
           <button
             className="navbar-toggler"
@@ -107,15 +112,14 @@ export default function TicketPage({ history }) {
               <h3>Passenger Names</h3> */}
             {/* {getPassengerName()} */}
             {/* </section> */}
-            <section className="ticket__section">
-              {getTicketPrice()}
-              <h3>Payment Method</h3>
-              <p>Credit Card</p>
-            </section>
+            <section className="ticket__section">{getTicketPrice()}</section>
           </div>
           <footer className="ticket__footer">
             <p>Transaction-ID</p>
             {getIdNumber()}
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <img className="ticket-qr" src="./QR.png" />
+            </div>
           </footer>
         </article>
       </div>

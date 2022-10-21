@@ -99,46 +99,6 @@ export default class App extends React.Component {
     );
   };
 
-  renderNamesOfPassenger = () => {
-    let passArray = localStorage.getItem("nameData");
-    if (passArray) {
-      let nameArray = JSON.parse(passArray);
-      return nameArray.map((name, idx) => {
-        return <p key={idx}> {name} </p>;
-      });
-    }
-  };
-
-  renderSeatNumbers = () => {
-    let seatArray = localStorage.getItem("reservedSeats");
-    if (seatArray) {
-      let seaArr = JSON.parse(seatArray);
-      return seaArr.map((seat, idx) => {
-        return <p key={idx}> {seat} </p>;
-      });
-    }
-  };
-
-  getSumTotal = () => {
-    let count = 0;
-    let tax = 150;
-    let seatArray = localStorage.getItem("reservedSeats");
-    if (seatArray) {
-      let seaArr = JSON.parse(seatArray);
-      for (let i = 0; i < seaArr.length; i++) {
-        count++;
-      }
-      return (
-        <div>
-          <hr className="hr3" />
-          <p> {1000 * count} </p>
-          <p> +{tax} </p>
-          <p> {1000 * count + tax} </p>{" "}
-        </div>
-      );
-    }
-  };
-
   render() {
     const { name, number, expiry, cvc, focused, issuer, formData, token } =
       this.state;
@@ -222,25 +182,18 @@ export default class App extends React.Component {
             </div>{" "}
           </div>{" "}
           <div className="columnTwo">
-            <h3> Unique Travels </h3>{" "}
+            <h3> HYD METRO </h3>{" "}
             <div>
               <p> BOOKING DETAILS </p>{" "}
               <div className="row">
                 <div className="col-6 pt">
-                  {/* <p className="hdng"> Username </p> <hr className="hr3" /> */}
                   <hr className="hr3" />
                   <p className="hdng"> From </p>
                   <p className="hdng"> To </p> <hr className="hr3" />
                   <p className="hdng"> Ticket price </p>{" "}
-                  {/* <p className="hdng"> Tax </p>{" "}
-                  <p className="hdng"> Toal Sum </p>{" "} */}
                 </div>{" "}
                 <div className="col-6">
                   <hr className="hr3" />
-                  {/* <p className="usrName">
-                    {" "}
-                    {localStorage.getItem("date")}{" "}
-                  </p>{" "} */}
                   <p className="usrName">
                     {" "}
                     {localStorage.getItem("startStation")}{" "}

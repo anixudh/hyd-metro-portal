@@ -2,6 +2,7 @@ import React from "react";
 import "../Homepage/homepage.css";
 import "./dashboard.css";
 import ModalImage from "react-modal-image";
+import { Analytics } from "../Analytics/Analytics";
 export default function Dashboard({ history }) {
   const bookTicket = (e) => {
     e.preventDefault();
@@ -18,7 +19,7 @@ export default function Dashboard({ history }) {
       </div>
 
       <div className=""></div>
-
+      <Analytics />
       <div className="main-container">
         <a href="/#" onClick={(e) => bookTicket(e)} className="mainBtnDash">
           <svg width="277" height="62">
