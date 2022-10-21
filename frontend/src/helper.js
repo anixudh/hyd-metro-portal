@@ -122,7 +122,7 @@ export const getPrice = (from, to) => {
       }
     }
 
-    let price = ((i + j) / 2 + 2) * 5;
+    let price = ((i + j) / 2) * 5;
     if (price > 65) return 65;
     else return (Math.round(price / 5) - 1) * 5;
   }
