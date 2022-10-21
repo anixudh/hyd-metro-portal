@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Routeselector.css";
 import * as apiCall from "./routeApifunc";
 import BusList from "../BusList/BusList";
+import { getPrice } from "../../helper";
 export default function Routeselector() {
   const [dataInp, setData] = useState("");
   const [startStation, setStartStation] = useState("");
@@ -10,11 +11,7 @@ export default function Routeselector() {
     e.preventDefault();
     setDestination(e.target.value);
   };
-  const renderBusList = (dataInp) => {
-    if (Object.keys(dataInp).length > 0) {
-      return <BusList value={dataInp} />;
-    }
-  };
+
   const handleFromStation = (e) => {
     e.preventDefault();
     setStartStation(e.target.value);
@@ -23,15 +20,9 @@ export default function Routeselector() {
 
   const getRoutes = (e) => {
     e.preventDefault();
-    // console.log(startStation,destination)
-    // apiCall
-    //   .getRoutesFromApi(startStation.startStation, destination.destination)
-    //   .then((response) => response.data)
-    //   .then((data) => {
-    //     setData(data.bus);
-    //   });
     localStorage.setItem("destination", destination);
     localStorage.setItem("startStation", startStation);
+    localStorage.setItem("price", getPrice(startStation, destination));
   };
 
   return (
@@ -171,8 +162,6 @@ export default function Routeselector() {
           </select>
           <input type="submit" className=" btn btn-primary btn-md getRoute" />
         </form>
-
-        <div>{renderBusList(dataInp)}</div>
       </div>
     </div>
   );

@@ -93,27 +93,37 @@ export const getPrice = (from, to) => {
 
     let i = 0,
       j = 0;
+
+    let seen = false;
     if (from.trim() !== centre) {
-      for (let station in stations) {
+      outer1: for (let station in stations) {
         if (stations[from.trim()] == stations[station]) {
           if (station == from.trim() || station == centre) {
-            if (i != 0) break;
-            else i = 0;
-          } else i++;
-        }
-      }
-    }
-    if (to.trim() !== centre) {
-      for (let station in stations) {
-        if (stations[to.trim()] == stations[station]) {
-          if (station == to.trim() || station == centre) {
-            if (j != 0) break;
-            else j = 0;
-          } else j++;
+            if (seen) break outer1;
+            else seen = true;
+          } else {
+            if (seen) i++;
+          }
         }
       }
     }
 
-    return ((i + j) / 2 + 2) * 5;
+    seen = false;
+    if (to.trim() !== centre) {
+      outer2: for (let station in stations) {
+        if (stations[to.trim()] == stations[station]) {
+          if (station == to.trim() || station == centre) {
+            if (seen) break outer2;
+            else seen = true;
+          } else {
+            if (seen) j++;
+          }
+        }
+      }
+    }
+
+    let price = ((i + j) / 2 + 2) * 5;
+    if (price > 65) return 65;
+    else return (Math.round(price / 5) - 1) * 5;
   }
 };

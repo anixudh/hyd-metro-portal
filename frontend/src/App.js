@@ -10,6 +10,7 @@ import TicketPage from "./components/TicketPage/TicketPage";
 import "./App.css";
 import Dashboard from "./components/Dashboard/Dashboard";
 import BookingHistory from "./components/BookingHistory/bookingHistory";
+import PayAllDues from "./components/PaymentTab/PayAllDues";
 
 function App() {
   return (
@@ -42,6 +43,11 @@ function App() {
             path="/bookingHistory"
             exact
             render={(props) => <BookingHistory {...props} />}
+          />
+          <Route
+            path="/payAllDues"
+            exact
+            render={(props) => <PayAllDues {...props} />}
           />
         </Switch>
       </Router>

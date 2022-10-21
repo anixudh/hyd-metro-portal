@@ -2,6 +2,8 @@ import Axios from "axios";
 import React, { useState, useEffect } from "react";
 import "./bookingHistory.css";
 import moment from "moment";
+import { getPrice } from "../../helper";
+import { Link } from "react-router-dom";
 
 const getBookingHistory = async () => {
   let tickets = await Axios.post("http://localhost:8080/bookingHistory", {
@@ -31,14 +33,19 @@ export default function BookingHistory({ history }) {
   };
 
   const changeDestination = async (ticketId) => {
+    const price = getPrice(localStorage.getItem("startStation"), toStation);
     await Axios.post("http://localhost:8080/bookingHistory/changeDestination", {
       ticketId: ticketId,
       destination: toStation,
+      price: price,
     });
   };
 
   return (
     <div>
+      <Link to={"/payAllDues"}>
+        <div className="btn btn-primary my-5 mx-5">Pay Monthy Dues</div>
+      </Link>
       {tickets &&
         tickets.length > 0 &&
         tickets.map((ticket, index) => {

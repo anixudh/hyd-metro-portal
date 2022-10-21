@@ -21,6 +21,9 @@ const TicketSchema = new Schema(
     bookedAt: {
       type: String,
     },
+    paid: {
+      type: String,
+    },
   },
   { collection: "tickets" }
 );

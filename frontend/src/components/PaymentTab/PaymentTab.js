@@ -72,7 +72,7 @@ export default class App extends React.Component {
     this.form.reset();
   };
 
-  moveToTicketPage = (e) => {
+  moveToTicketPage = (e, paid) => {
     e.preventDefault();
     localStorage.setItem("paymentData", JSON.stringify(this.state.token));
     const price = getPrice(
@@ -91,6 +91,7 @@ export default class App extends React.Component {
         startStation: localStorage.getItem("startStation"),
         destination: localStorage.getItem("destination"),
         price: price,
+        paid: paid,
       },
       (err, data) => {
         if (err) console.log(err);
@@ -211,7 +212,7 @@ export default class App extends React.Component {
                 <input type="hidden" name="issuer" value={issuer} />{" "}
                 <div className="">
                   <button
-                    onClick={(e) => this.moveToTicketPage(e)}
+                    onClick={(e) => this.moveToTicketPage(e, true)}
                     className="btn btn-light btCustom"
                   >
                     PAY{" "}
@@ -253,7 +254,10 @@ export default class App extends React.Component {
                 </div>{" "}
               </div>{" "}
             </div>{" "}
-            <button className="btn border" onClick={this.moveToTicketPage}>
+            <button
+              className="btn border"
+              onClick={(e) => this.moveToTicketPage(e, false)}
+            >
               Pay Later
             </button>
           </div>{" "}
