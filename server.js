@@ -62,6 +62,6 @@ app.get("*", function (req, res) {
   res.sendFile(path.resolve(__dirname, "./frontend/build", "index.html"));
 });
 
-app.listen(PORT, () => {
+app.listen(8080, () => {
   console.log(`server running on port ${8080}`);
 });
