@@ -46,16 +46,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
-app.use("/", login);
+app.use("/api", login);
 
-app.use("/routes", bookingRoute);
-app.use("/register", registerRouter); // To register page
+app.use("/api/routes", bookingRoute);
+app.use("/api/register", registerRouter); // To register page
 app.use(
-  "/user",
+  "/api/user",
   passport.authenticate("jwt", { session: false }),
   loggedInPage
 ); //To Secure Route
-app.use("/bookingHistory", bookingHistory);
+app.use("/api/bookingHistory", bookingHistory);
 app.use(express.static(path.resolve(__dirname, "./frontend/build")));
 
 app.get("*", function (req, res) {
