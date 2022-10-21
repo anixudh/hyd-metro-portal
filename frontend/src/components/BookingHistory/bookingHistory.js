@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import ModalImage from "react-modal-image";
 
 const getBookingHistory = async () => {
-  let tickets = await Axios.post("/bookingHistory", {
+  let tickets = await Axios.post("/api/bookingHistory", {
     email: localStorage.getItem("email"),
   });
   return tickets.data.tickets;
@@ -35,7 +35,7 @@ export default function BookingHistory({ history }) {
 
   const changeDestination = async (ticketId) => {
     const price = getPrice(localStorage.getItem("startStation"), toStation);
-    await Axios.post("/bookingHistory/changeDestination", {
+    await Axios.post("/api/bookingHistory/changeDestination", {
       ticketId: ticketId,
       destination: toStation,
       price: price,
