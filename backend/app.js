@@ -39,11 +39,7 @@ mongoose
   });
 //---------------------------------------------
 // Making Build Folder as Public
-app.use(express.static(path.join(__dirname, "build")));
 
-app.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
-});
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -60,4 +56,9 @@ app.use(
   loggedInPage
 ); //To Secure Route
 app.use("/bookingHistory", bookingHistory);
+app.use(express.static(path.join(__dirname, "frontend", "build")));
+
+app.get("*", function (req, res) {
+  res.sendFile(path.join(__dirname, "frontend", "build", "index.html"));
+});
 module.exports = app;
