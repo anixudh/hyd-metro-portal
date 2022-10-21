@@ -84,7 +84,7 @@ export default class App extends React.Component {
     localStorage.setItem("transactionId", transactionId);
     window.location.href = "/getTicket";
     Axios.post(
-      "http://localhost:8080/routes/",
+      "/routes/",
       {
         transactionId: transactionId,
         email: localStorage.getItem("email"),

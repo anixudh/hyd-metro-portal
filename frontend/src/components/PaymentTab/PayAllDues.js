@@ -30,7 +30,7 @@ export default class App extends React.Component {
     const tok = sessionStorage.getItem("authToken");
     const decoded = jwt_decode(tok);
     const getUnpaidTickets = async () => {
-      let tickets = await Axios.post("http://localhost:8080/bookingHistory", {
+      let tickets = await Axios.post("/bookingHistory", {
         email: localStorage.getItem("email"),
         unpaidOnly: true,
       });
@@ -83,7 +83,7 @@ export default class App extends React.Component {
     window.location.href = "/dashboard";
     (async () => {
       this.state.tickets.forEach(async (ticket) => {
-        await Axios.post("http://localhost:8080/bookingHistory/payAllDues", {
+        await Axios.post("/bookingHistory/payAllDues", {
           ticketId: ticket._id,
           paid: true,
         });
