@@ -145,6 +145,7 @@ export default class App extends React.Component {
                               <>
                                 <p className="usrName">From</p>
                                 <p className="usrName">To</p>
+                                <p className="usrName">Price</p>
                                 <hr className="hr3" />
                               </>
                             );
@@ -158,6 +159,10 @@ export default class App extends React.Component {
                               <>
                                 <p className="usrName">{ticket.startStation}</p>
                                 <p className="usrName">{ticket.destination}</p>
+                                <p className="usrName">
+                                  {"₹"}
+                                  {ticket.price}
+                                </p>
                                 <hr className="hr3" />
                               </>
                             );

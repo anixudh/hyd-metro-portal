@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import "./Routeselector.css";
-import * as apiCall from "./routeApifunc";
-import BusList from "../BusList/BusList";
 import { getPrice } from "../../helper";
 export default function Routeselector() {
-  const [dataInp, setData] = useState("");
   const [startStation, setStartStation] = useState("");
   const [destination, setDestination] = useState("");
   const handleToStation = (e) => {

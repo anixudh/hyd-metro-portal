@@ -102,16 +102,8 @@ export default function TicketPage({ history }) {
             <section className="ticket__section">
               {getLocationData()}
               {getChangeStation()}
-
-              {/* {getSeatNumbers()} */}
-              {/* <p>
-                Your seats are together <span>{getDateValue()}</span>
-              </p> */}
             </section>
-            {/* <section className="ticket__section">
-              <h3>Passenger Names</h3> */}
-            {/* {getPassengerName()} */}
-            {/* </section> */}
+
             <section className="ticket__section">{getTicketPrice()}</section>
           </div>
           <footer className="ticket__footer">

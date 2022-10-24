@@ -54,7 +54,11 @@ export default function BookingHistory({ history }) {
           return (
             <div key={index} className="ticketBox card">
               {ticket.startStation} {"   --   "} {ticket.destination}
-              {ticket.paid ? (
+              <div>
+                {"₹"}
+                {ticket.price}
+              </div>
+              {ticket.paid == "true" ? (
                 <div style={{ color: "green" }}>Paid</div>
               ) : (
                 <div style={{ color: "yellow" }}>Pending</div>
